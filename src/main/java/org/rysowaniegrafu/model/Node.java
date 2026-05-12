@@ -4,14 +4,14 @@ public class Node {
     private final int id;
     private double x;
     private double y;
-    private boolean is_fixed;
+    private boolean isFixed;
     private int degree;
 
-    public Node(int id, double x, double y, boolean is_fixed, int degree) {
+    public Node(int id, double x, double y, boolean isFixed, int degree) {
         this.id = id;
         this.x = x;
         this.y = y;
-        this.is_fixed = is_fixed;
+        this.isFixed = isFixed;
         this.degree = degree;
     }
 
@@ -35,12 +35,12 @@ public class Node {
         this.y = y;
     }
 
-    public boolean isIs_fixed() {
-        return is_fixed;
+    public boolean isFixed() {
+        return isFixed;
     }
 
-    public void setIs_fixed(boolean is_fixed) {
-        this.is_fixed = is_fixed;
+    public void setFixed(boolean fixed) {
+        this.isFixed = fixed;
     }
 
     public int getDegree() {
