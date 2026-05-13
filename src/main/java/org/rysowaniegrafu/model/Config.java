@@ -19,7 +19,7 @@ public class Config {
         this.inputPath = "";
         this.outputPath = "";
         this.useBinary = false;
-        this.algorithm = Algorithm.FR;
+        this.algorithm = Algorithm.FRUCHTERMAN;
 
         this.width = 800.0;
         this.height = 600.0;

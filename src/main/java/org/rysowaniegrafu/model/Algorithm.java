@@ -1,6 +1,6 @@
 package org.rysowaniegrafu.model;
 
 public enum Algorithm {
-    FR,
+    FRUCHTERMAN,
     TUTTE
 }

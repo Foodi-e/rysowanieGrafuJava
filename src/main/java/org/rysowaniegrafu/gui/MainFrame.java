@@ -11,6 +11,9 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null); // wyśrodkowanie okna
         setLayout(new BorderLayout()); // układ: środek, lewo, prawo, góra, dół
 
+        TopPanel topPanel = new TopPanel();
+        add(topPanel, BorderLayout.NORTH);
+
         JLabel placeholder = new JLabel("Tutaj wkrótce pojawi się płótno z grafem", SwingConstants.CENTER);
         add(placeholder, BorderLayout.CENTER);
     }
