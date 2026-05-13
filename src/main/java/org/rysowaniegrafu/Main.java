@@ -1,8 +1,11 @@
 package org.rysowaniegrafu;
 
+import org.rysowaniegrafu.gui.MainFrame;
+
 public class Main {
     static void main() {
-        System.out.println("Hello World!");
+        MainFrame frame = new MainFrame();
+        frame.setVisible(true);
     }
 }
 
