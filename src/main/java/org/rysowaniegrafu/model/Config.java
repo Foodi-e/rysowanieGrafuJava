@@ -103,11 +103,11 @@ public class Config {
         this.radius = radius;
     }
 
-    public int getkFixed() {
+    public int getKFixed() {
         return kFixed;
     }
 
-    public void setkFixed(int kFixed) {
+    public void setKFixed(int kFixed) {
         this.kFixed = kFixed;
     }
 
