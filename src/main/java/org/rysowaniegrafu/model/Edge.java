@@ -2,11 +2,11 @@ package org.rysowaniegrafu.model;
 
 public class Edge {
     private String name;
-    private int u;
-    private int v;
+    private Node u;
+    private Node v;
     private double weight;
 
-    public Edge(String name, int u, int v, double weight) {
+    public Edge(String name, Node u, Node v, double weight) {
         this.name = name;
         this.u = u;
         this.v = v;
@@ -21,19 +21,19 @@ public class Edge {
         this.weight = weight;
     }
 
-    public int getV() {
+    public Node getV() {
         return v;
     }
 
-    public void setV(int v) {
+    public void setV(Node v) {
         this.v = v;
     }
 
-    public int getU() {
+    public Node getU() {
         return u;
     }
 
-    public void setU(int u) {
+    public void setU(Node u) {
         this.u = u;
     }
 

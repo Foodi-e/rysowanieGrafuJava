@@ -14,7 +14,7 @@ public class MainFrame extends JFrame {
         TopPanel topPanel = new TopPanel();
         add(topPanel, BorderLayout.NORTH);
 
-        JLabel placeholder = new JLabel("Tutaj wkrótce pojawi się płótno z grafem", SwingConstants.CENTER);
-        add(placeholder, BorderLayout.CENTER);
+        GraphCanvas canvas = new GraphCanvas();
+        add(canvas, BorderLayout.CENTER);
     }
 }
