@@ -18,6 +18,10 @@ public class Graph {
         nodes.put(node.getId(), node);
     }
 
+    public void addNodeAbsent(Node node){
+        nodes.putIfAbsent(node.getId(),node);
+    }
+    
     public void addEdge(Edge edge) {
         edges.add(edge);
     }
