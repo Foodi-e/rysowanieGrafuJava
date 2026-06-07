@@ -1,11 +1,13 @@
 package org.rysowaniegrafu.gui;
 
-import org.rysowaniegrafu.algorithms.Fruchterman;
+import org.rysowaniegrafu.io.MockDataLoader;
 import org.rysowaniegrafu.model.Algorithm;
+import org.rysowaniegrafu.model.Graph;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.util.function.Consumer;
 
 public class TopPanel extends JPanel {
 
@@ -14,10 +16,22 @@ public class TopPanel extends JPanel {
     private JComboBox<Algorithm> comboAlgorithm;
     private JButton btnStart;
 
+    private Consumer<Graph> onGraphLoaded;
+
+    private Consumer<Algorithm> onStartClicked;
+    public void setOnStartClicked(Consumer<Algorithm> onStartClicked) {
+        this.onStartClicked = onStartClicked;
+    }
+
+    private Consumer<Algorithm> onAlgorithmChanged;
+    public void setOnAlgorithmChanged(Consumer<Algorithm> onAlgorithmChanged) {
+        this.onAlgorithmChanged = onAlgorithmChanged;
+    }
+
     public TopPanel() {
         setLayout(new FlowLayout(FlowLayout.LEFT, 15, 10));
 
-        // iInicjalizacja przycisków
+        // Inicjalizacja przycisków
         btnLoad = new JButton("Wczytaj Graf");
         btnSave = new JButton("Zapisz Wynik");
 
@@ -36,6 +50,10 @@ public class TopPanel extends JPanel {
         add(btnStart);
     }
 
+    public void setOnGraphLoaded(Consumer<Graph> onGraphLoaded) {
+        this.onGraphLoaded = onGraphLoaded;
+    }
+
     private void setupActions() {
         // wczytywanie pliku
         btnLoad.addActionListener(e -> {
@@ -47,7 +65,16 @@ public class TopPanel extends JPanel {
             if (userSelection == JFileChooser.APPROVE_OPTION) {
                 File fileToLoad = fileChooser.getSelectedFile();
                 System.out.println("Wybrano plik do wczytania: " + fileToLoad.getAbsolutePath());
-                //TODO: dodac data reader
+
+                // Generujemy dane testowe
+                Graph testGraph = MockDataLoader.createDummyGraph();
+
+                //Przekazujemy wczytany graf
+                if (onGraphLoaded != null) {
+                    onGraphLoaded.accept(testGraph);
+                }
+
+                //TODO: dodac data reader (Kolega podmieni linijkę z MockDataLoader na swój DataReader)
             }
         });
 
@@ -61,6 +88,20 @@ public class TopPanel extends JPanel {
                 File fileToSave = fileChooser.getSelectedFile();
                 System.out.println("Wybrano miejsce do zapisu: " + fileToSave.getAbsolutePath());
                 //TODO: dodać data writer
+            }
+        });
+
+        btnStart.addActionListener(e -> {
+            if (onStartClicked != null) {
+                // Pobieramy algorytm aktualnie wybrany z listy rozwijanej
+                Algorithm selectedAlgo = (Algorithm) comboAlgorithm.getSelectedItem();
+                onStartClicked.accept(selectedAlgo);
+            }
+        });
+
+        comboAlgorithm.addActionListener(e -> {
+            if (onAlgorithmChanged != null) {
+                onAlgorithmChanged.accept((Algorithm) comboAlgorithm.getSelectedItem());
             }
         });
     }
