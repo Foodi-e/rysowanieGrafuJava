@@ -5,22 +5,25 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-public class GraphReader {
-    public static Graph LoadBin(String path_n, String path_e){
+public class DataReader {
+    public static Graph LoadBin(String path_n, String path_e) throws  IOException{
         Graph graph = new Graph();
-        graph.nodes = loadNodesBinary(path_n);
-        graph.edges = loadEdges(path_e,graph);
+        loadNodesBinary(path_n, graph);
+        loadEdges(path_e,graph);
+        return graph;
     }
-    public static Graph LoadCSV(String path_n, String path_e){
+    public static Graph LoadCSV(String path_n, String path_e) throws IOException{
         Graph graph = new Graph();
-        graph.nodes = loadNodesCSV(path_n);
-        graph.edges = loadEdges(path_e,graph);
+        loadNodesCSV(path_n, graph);
+        loadEdges(path_e, graph);
+        return graph;
     }
-    public static Graph LoadOnlyEdges(String path){
+    public static Graph LoadOnlyEdges(String path) throws IOException{
         Graph graph = new Graph();
-        graph.edges = loadEdges(path,graph);
+        loadEdges(path,graph);
+        return graph;
     }
-    private static List<Node> loadNodesCSV(String path) throws IOException {
+    private static List<Node> loadNodesCSV(String path,Graph g) throws IOException {
         List<Node> nodes = new ArrayList<>();
 
         List<String> lines = Files.readAllLines(Paths.get(path));
@@ -48,7 +51,7 @@ public class GraphReader {
 
         return nodes;
     }
-    private static List<Node> loadNodesBinary(String path) throws IOException {
+    private static List<Node> loadNodesBinary(String path,Graph g) throws IOException {
         List<Node> nodes = new ArrayList<>();
 
         try (DataInputStream dis =
@@ -68,7 +71,7 @@ public class GraphReader {
 
         return nodes;
     }
-    private static List<Edge> loadEdges(String path, Graph g) throws IOException {
+    private static void loadEdges(String path, Graph g) throws IOException {
         List<Edge> edges = new ArrayList<>();
 
         List<String> lines = Files.readAllLines(Paths.get(path));
@@ -119,10 +122,10 @@ public class GraphReader {
                     throw new IllegalArgumentException(
                             "Invalid edge line: " + line);
             }
-
-            edges.add(new Edge(name, from, to, weight));
+            g.addNodeAbsent(new Node(from,0,0,false,0));
+            g.addNodeAbsent(new Node(to,0,0,false,0));
+            g.addEdge(new Edge(name, g.getNode(from), g.getNode(from), weight));
         }
-        return edges;
     }
     private static boolean isInteger(String s) {
         try {
