@@ -76,7 +76,7 @@ public class DataReader {
             line = line.trim();
             if (line.isEmpty()) continue;
 
-            String[] parts = line.split("\\s+");
+            String[] parts = line.split("[,\\s]+");
 
             String name = "E";
             int from;
@@ -106,7 +106,8 @@ public class DataReader {
                     weight = Double.parseDouble(parts[3]);
                     break;
                 default:
-                    throw new IllegalArgumentException("Invalid edge line: " + line);
+                    System.out.println("Pominięto linię: " + line);
+                    continue;
             }
 
             // Idealne wykorzystanie metody putIfAbsent z Twojego Graph
