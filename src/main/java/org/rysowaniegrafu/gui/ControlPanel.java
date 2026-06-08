@@ -21,7 +21,7 @@ public class ControlPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createTitledBorder("Parametry Algorytmu"));
 
-        // ZWIĘKSZONA SZEROKOŚĆ PANELU Z 220 NA 260
+        // SZEROKOŚĆ PANELU
         setPreferredSize(new Dimension(260, 0));
 
         createTuttePanel();
@@ -38,7 +38,7 @@ public class ControlPanel extends JPanel {
         panelTutte.setLayout(new BoxLayout(panelTutte, BoxLayout.Y_AXIS));
         panelTutte.setBorder(BorderFactory.createTitledBorder("Opcje: Tutte"));
 
-        // 1. Promień
+        // Promień
         JLabel lblRadius = new JLabel("Promień okręgu:");
         lblRadius.setAlignmentX(Component.LEFT_ALIGNMENT); // TWARDE WYRÓWNANIE DO LEWEJ
         panelTutte.add(lblRadius);
@@ -68,7 +68,7 @@ public class ControlPanel extends JPanel {
         panelTutte.add(spinKFixed);
         panelTutte.add(Box.createVerticalStrut(10));
 
-        // 3. Tryb wyboru wierzchołków
+        // Tryb wyboru wierzchołków
         JLabel lblMode = new JLabel("Wybór wierzchołków ramki:");
         lblMode.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelTutte.add(lblMode);

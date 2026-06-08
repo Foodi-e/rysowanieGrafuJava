@@ -51,13 +51,13 @@ public class CanvasController extends MouseAdapter {
         draggedNode = null;
     }
 
-    // --- OBSŁUGA PRZESUWANIA (Pan Kamery ATA Przeciąganie Węzła) ---
+    // --- OBSŁUGA PRZESUWANIA ---
     @Override
     public void mouseDragged(MouseEvent e) {
         if (draggedNode != null) {
-            // WARIANT 1: Przeciągamy wierzchołek
+            // Przeciągamy wierzchołek
             try {
-                // Musimy przeliczyć pozycję kursora na ekranie z powrotem na współrzędne w świecie grafu
+                // Musimy przeliczyć pozycję kursora na ekranie z powrotem na współrzędne w grafu
                 AffineTransform at = new AffineTransform();
                 at.translate(canvas.getPanX(), canvas.getPanY());
                 at.scale(canvas.getZoomFactor(), canvas.getZoomFactor());
@@ -73,7 +73,7 @@ public class CanvasController extends MouseAdapter {
                 ex.printStackTrace();
             }
         } else {
-            // WARIANT 2: Przesuwamy całą kamerę (Pan)
+            // Przesuwamy całą kamerę
             int dx = e.getX() - lastMousePos.x;
             int dy = e.getY() - lastMousePos.y;
 
@@ -82,11 +82,11 @@ public class CanvasController extends MouseAdapter {
             lastMousePos = e.getPoint();
         }
 
-        // Zawsze odświeżamy ekran, żeby widzieć ruch na żywo
+        // odświeżamy ekran
         canvas.repaint();
     }
 
-    // --- OBSŁUGA ROLKI (Zoom) ---
+    // --- Zoom ---
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         double scaleFactor = 1.1;
@@ -98,7 +98,7 @@ public class CanvasController extends MouseAdapter {
         canvas.repaint();
     }
 
-    // --- MATEMATYKA: Wyszukiwanie węzła uwzględniając kamerę ---
+    // ---  Wyszukiwanie węzła uwzględniając kamerę ---
     private Node findNodeAt(int screenX, int screenY) {
         if (canvas.getGraph() == null || canvas.getGraph().getNodes() == null) return null;
 

@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
         GraphCanvas canvas = new GraphCanvas();
         ControlPanel controlPanel = new ControlPanel(config); // Inicjalizacja nowego panelu
 
-        // --- 1. ODBIÓR GRAFU (Wczytywanie) ---
+        // --- Wczytywanie ---
         topPanel.setOnGraphLoaded(graph -> {
             canvas.setGraph(graph);
             canvas.setPanX(canvas.getWidth() / 2.0);
@@ -43,13 +43,13 @@ public class MainFrame extends JFrame {
             lastRunAlgorithm = algorithm;
             runCalculations(canvas);
 
-            // Auto-Focus przy "twardym" starcie
+            // Auto-Focus
             canvas.setPanX(canvas.getWidth() / 2.0);
             canvas.setPanY(canvas.getHeight() / 2.0);
             canvas.repaint();
         });
 
-        // --- 3. AKCJA ZMIANY PARAMETRU W CZASIE RZECZYWISTYM ---
+        // --- AKCJA ZMIANY PARAMETRU W CZASIE RZECZYWISTYM ---
         controlPanel.setOnConfigChanged(() -> {
             if (lastRunAlgorithm != null) {
                 runCalculations(canvas); // Przeliczamy ponownie fizykę
@@ -60,7 +60,7 @@ public class MainFrame extends JFrame {
         // --- 4. AKCJA ZMIANY ALGORYTMU NA LIŚCIE ---
         topPanel.setOnAlgorithmChanged(algorithm -> {
             config.setAlgorithm(algorithm); // Aktualizujemy główny Config
-            controlPanel.setAlgorithm(algorithm); // Wymuszamy zmianę widoku suwaków!
+            controlPanel.setAlgorithm(algorithm); // Wymuszamy zmianę widoku suwaków
         });
 
         // --- 5. OBSŁUGA ZAPISU GRAFU ---

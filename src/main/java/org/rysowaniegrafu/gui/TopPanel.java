@@ -141,7 +141,7 @@ public class TopPanel extends JPanel {
         });
     }
 
-    // Metoda pomocnicza odchudzająca kod
+    // Metoda pomocnicza
     private File chooseFile(String title) {
         JFileChooser fc = new JFileChooser();
         fc.setDialogTitle(title);

@@ -9,7 +9,7 @@ import java.util.Locale;
 
 public class DataWriter {
 
-    // Zapis do formatu tekstowego (CSV) z użyciem try-with-resources
+    // Zapis do formatu tekstowego (CSV)
     public static void SaveCSV(String path, Graph graph) throws IOException {
         List<Node> nodes = graph.getNodes();
 
@@ -24,7 +24,7 @@ public class DataWriter {
         }
     }
 
-    // Zapis do formatu binarnego (BIN) z użyciem try-with-resources
+    // Zapis do formatu binarnego (BIN)
     public static void SaveBin(String path, Graph graph) throws IOException {
         List<Node> nodes = graph.getNodes();
 

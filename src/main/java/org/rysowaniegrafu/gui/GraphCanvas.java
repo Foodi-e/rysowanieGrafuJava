@@ -12,7 +12,7 @@ public class GraphCanvas extends JPanel {
 
     private Graph graph;
 
-    // Zmienne kamery (Zoom & Pan)
+    // Zmienne kamery
     private double panX = 0;
     private double panY = 0;
     private double zoomFactor = 1.0;
@@ -52,10 +52,9 @@ public class GraphCanvas extends JPanel {
         if (graph == null) return;
 
         // --- POPRAWKA DLA EKRANÓW RETINA ---
-        // 1. Zapisujemy systemową transformację (zawiera skalowanie ekranu Maca)
         AffineTransform oldAt = g2d.getTransform();
 
-        // 2. Dodajemy nasze własne parametry kamery
+        // dodaje własne parametry kamery
         g2d.translate(panX, panY);
         g2d.scale(zoomFactor, zoomFactor);
 
@@ -98,7 +97,6 @@ public class GraphCanvas extends JPanel {
             }
         }
 
-        // 3. Po narysowaniu grafu, przywracamy systemową transformację!
         g2d.setTransform(oldAt);
     }
 }
