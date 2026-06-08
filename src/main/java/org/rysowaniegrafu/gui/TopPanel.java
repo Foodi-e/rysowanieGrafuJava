@@ -1,5 +1,6 @@
 package org.rysowaniegrafu.gui;
 
+import org.rysowaniegrafu.io.DataReader;
 import org.rysowaniegrafu.io.MockDataLoader;
 import org.rysowaniegrafu.model.Algorithm;
 import org.rysowaniegrafu.model.Graph;
@@ -66,15 +67,16 @@ public class TopPanel extends JPanel {
                 File fileToLoad = fileChooser.getSelectedFile();
                 System.out.println("Wybrano plik do wczytania: " + fileToLoad.getAbsolutePath());
 
-                // Generujemy dane testowe
-                Graph testGraph = MockDataLoader.createDummyGraph();
+                try {
+                    Graph loadedGraph = DataReader.LoadOnlyEdges(fileToLoad.getAbsolutePath());
 
-                //Przekazujemy wczytany graf
-                if (onGraphLoaded != null) {
-                    onGraphLoaded.accept(testGraph);
+                    if (onGraphLoaded != null) {
+                        onGraphLoaded.accept(loadedGraph);
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Błąd wczytywania pliku: " + ex.getMessage(), "Błąd I/O", JOptionPane.ERROR_MESSAGE);
                 }
-
-                //TODO: dodac data reader (Kolega podmieni linijkę z MockDataLoader na swój DataReader)
             }
         });
 

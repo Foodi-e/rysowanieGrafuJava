@@ -73,7 +73,7 @@ public class MainFrame extends JFrame {
         if (lastRunAlgorithm == Algorithm.TUTTE) {
             org.rysowaniegrafu.algorithms.Tutte.runTutteEmbedding(canvas.getGraph(), config);
         } else if (lastRunAlgorithm == Algorithm.FRUCHTERMAN) {
-            org.rysowaniegrafu.algorithms.Fruchterman.runFruchterman(canvas.getGraph(), config)
+            org.rysowaniegrafu.algorithms.Fruchterman.runFruchterman(canvas.getGraph(), config);
         }
     }
 }

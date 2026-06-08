@@ -1,4 +1,9 @@
-package org.rysowaniegrafu.model;
+package org.rysowaniegrafu.algorithms;
+
+import org.rysowaniegrafu.model.Config;
+import org.rysowaniegrafu.model.Edge;
+import org.rysowaniegrafu.model.Graph;
+import org.rysowaniegrafu.model.Node;
 
 import java.util.HashMap;
 import java.util.List;
@@ -6,7 +11,7 @@ import java.util.Map;
 import java.util.Random;
 
 public class Fruchterman {
-    public void runFruchterman(Graph g, Config c) {
+    public static void runFruchterman(Graph g, Config c) {
         Random rand = new Random();
         List<Node> nodes = g.getNodes();
         List<Edge> edges = g.getEdges();
@@ -32,7 +37,7 @@ public class Fruchterman {
         }
     }
 
-    private double loop(List<Node> nodes, List<Edge> edges, Config c, double k, double[] dx, double[] dy, double temp, Map<Integer, Integer> idToIndexMap) {
+    private static double loop(List<Node> nodes, List<Edge> edges, Config c, double k, double[] dx, double[] dy, double temp, Map<Integer, Integer> idToIndexMap) {
         int nodesSize = nodes.size();
         for (int i = 0; i < nodesSize; i++) {
             Node u = nodes.get(i);
