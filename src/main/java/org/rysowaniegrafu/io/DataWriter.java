@@ -1,4 +1,40 @@
 package org.rysowaniegrafu.io;
 
+import org.rysowaniegrafu.model.Graph;
+import org.rysowaniegrafu.model.Node;
+
+import java.io.*;
+import java.util.List;
+import java.util.Locale;
+
 public class DataWriter {
+
+    // Zapis do formatu tekstowego (CSV) z użyciem try-with-resources
+    public static void SaveCSV(String path, Graph graph) throws IOException {
+        List<Node> nodes = graph.getNodes();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
+            for (Node node : nodes) {
+                // Składamy linię: id,x,y (Locale.US gwarantuje kropkę w liczbach zmiennoprzecinkowych)
+                String line = String.format(Locale.US, "%d,%.6f,%.6f",
+                        node.getId(), node.getX(), node.getY());
+                writer.write(line);
+                writer.newLine();
+            }
+        }
+    }
+
+    // Zapis do formatu binarnego (BIN) z użyciem try-with-resources
+    public static void SaveBin(String path, Graph graph) throws IOException {
+        List<Node> nodes = graph.getNodes();
+
+        try (DataOutputStream dos = new DataOutputStream(
+                new BufferedOutputStream(new FileOutputStream(path)))) {
+            for (Node node : nodes) {
+                dos.writeInt(node.getId());
+                dos.writeDouble(node.getX());
+                dos.writeDouble(node.getY());
+            }
+        }
+    }
 }

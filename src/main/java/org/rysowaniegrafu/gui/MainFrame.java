@@ -2,6 +2,7 @@ package org.rysowaniegrafu.gui;
 
 import org.rysowaniegrafu.model.Algorithm;
 import org.rysowaniegrafu.model.Config;
+import org.rysowaniegrafu.model.Graph;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,6 +61,31 @@ public class MainFrame extends JFrame {
         topPanel.setOnAlgorithmChanged(algorithm -> {
             config.setAlgorithm(algorithm); // Aktualizujemy główny Config
             controlPanel.setAlgorithm(algorithm); // Wymuszamy zmianę widoku suwaków!
+        });
+
+        // --- 5. OBSŁUGA ZAPISU GRAFU ---
+        topPanel.setOnSaveClicked((path, isBinary) -> {
+            Graph currentGraph = canvas.getGraph();
+
+            if (currentGraph == null || currentGraph.getNodes().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Nie ma żadnego grafu do zapisania!", "Błąd zapisu", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            try {
+                if (isBinary) {
+                    System.out.println("Zapis struktury binarnej BIN do: " + path);
+                    org.rysowaniegrafu.io.DataWriter.SaveBin(path, currentGraph);
+                } else {
+                    System.out.println("Zapis struktury tekstowej CSV do: " + path);
+                    org.rysowaniegrafu.io.DataWriter.SaveCSV(path, currentGraph);
+                }
+
+                JOptionPane.showMessageDialog(this, "Pomyślnie zapisano współrzędne grafu!", "Sukces", JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Błąd podczas zapisu pliku:\n" + ex.getMessage(), "Błąd I/O", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         // Konstrukcja układu w oknie

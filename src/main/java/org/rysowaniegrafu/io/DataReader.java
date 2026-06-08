@@ -29,20 +29,32 @@ public class DataReader {
 
     private static void loadNodesCSV(String path, Graph g) throws IOException {
         List<String> lines = Files.readAllLines(Paths.get(path));
+
         for (String line : lines) {
             line = line.trim();
             if (line.isEmpty()) continue;
 
-            String[] parts = line.split(",");
+            // Wyrażenie regularne "[,\\s]+" dzieli linię po przecinku LUB po białych znakach (spacje, taby)
+            String[] parts = line.split("[,\\s]+");
+
+            // Jeśli linia nie ma dokładnie 3 kolumn, ignorujemy ją zamiast rzucać błąd
             if (parts.length != 3) {
-                throw new IllegalArgumentException("Invalid CSV node line: " + line);
+                System.out.println("Pominięto linię (nieprawidłowa liczba kolumn): " + line);
+                continue;
             }
 
-            int id = Integer.parseInt(parts[0].trim());
-            double x = Double.parseDouble(parts[1].trim());
-            double y = Double.parseDouble(parts[2].trim());
+            try {
+                // Próba konwersji tekstu na liczby
+                int id = Integer.parseInt(parts[0].trim());
+                double x = Double.parseDouble(parts[1].trim());
+                double y = Double.parseDouble(parts[2].trim());
 
-            g.addNode(new Node(id, x, y, false, 0));
+                g.addNode(new Node(id, x, y, false, 0));
+
+            } catch (NumberFormatException e) {
+                // Jeśli trafimy na nagłówek tekstowy np. "ID X Y", program po prostu go przeskoczy
+                System.out.println("Pominięto tekstowy nagłówek: " + line);
+            }
         }
     }
 
@@ -101,14 +113,18 @@ public class DataReader {
             g.addNodeAbsent(new Node(from, 0, 0, false, 0));
             g.addNodeAbsent(new Node(to, 0, 0, false, 0));
 
-            // Pobieramy referencje z mapy
+            // Zabezpieczenie przed brakującymi wierzchołkami
             Node u = g.getNode(from);
             Node v = g.getNode(to);
 
-            // Tę linijkę trzeba było poprawić (kolega łączył from z from)
+            if (u == null || v == null) {
+                System.err.println("Uwaga: Pominięto krawędź " + name + " - nie znaleziono węzła: " + from + " lub " + to);
+                continue; // Przejdź do następnej linii, nie dodawaj tej krawędzi
+            }
+
             g.addEdge(new Edge(name, u, v, weight));
 
-            // Podbijamy degree, bez którego Tutte wywaliłby błąd dzielenia przez 0
+            // Podbijamy degree
             u.setDegree(u.getDegree() + 1);
             v.setDegree(v.getDegree() + 1);
         }
