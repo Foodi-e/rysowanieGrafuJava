@@ -8,17 +8,17 @@ import java.util.*;
 public class GraphReader {
     public static Graph LoadBin(String path_n, String path_e){
         Graph graph = new Graph();
-        graph.nodes = loadNodesBinary(path_n)
-        graph.edges = loadEdges(path_e,graph)
+        graph.nodes = loadNodesBinary(path_n);
+        graph.edges = loadEdges(path_e,graph);
     }
     public static Graph LoadCSV(String path_n, String path_e){
         Graph graph = new Graph();
-        graph.nodes = loadNodesCSV(path_n)
-        graph.edges = loadEdges(path_e,graph)
+        graph.nodes = loadNodesCSV(path_n);
+        graph.edges = loadEdges(path_e,graph);
     }
     public static Graph LoadOnlyEdges(String path){
         Graph graph = new Graph();
-        graph.edges = loadEdges(path,graph)
+        graph.edges = loadEdges(path,graph);
     }
     private static List<Node> loadNodesCSV(String path) throws IOException {
         List<Node> nodes = new ArrayList<>();
