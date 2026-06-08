@@ -11,7 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Fruchterman {
-    public static void runFruchterman(Graph g){
+    public static void runFruchterman(Graph g, Config c){
+        double [] dx = new double[g.get
         for (Node node : g.nodes) {
             node.setX(rand.nextDouble() * c.getWidth());
             node.setY(rand.nextDouble() * c.getHeight());
@@ -19,10 +20,10 @@ public class Fruchterman {
         double k = Math.sqrt((c.getWidth() * c.getHeight()) / n);
       
         for (int i = 0; i < c.getIterations() && temp > 0.00001; i++) {
-            temp = loop(nodes, edges, c, k, dx, dy, temp);
+            temp = loop(g, c, k, dx, dy, temp);
         }
     }
-    private static void loop(double t, Graph g){
+    private static void loop(Graph g, Config c, ){
         
     }
 }
