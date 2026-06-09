@@ -54,7 +54,7 @@ public class TopPanel extends JPanel {
     public void setOnStartClicked(Consumer<Algorithm> onStartClicked) { this.onStartClicked = onStartClicked; }
 
     private void setupActions() {
-        // --- ZAAWANSOWANE WCZYTYWANIE ---
+        // --- wczytywanie ---
         btnLoad.addActionListener(e -> {
             String[] options = {"Tylko krawędzie (TXT)", "Współrzędne + Krawędzie (CSV)", "Pliki Binarne (BIN)"};
             int choice = JOptionPane.showOptionDialog(this,
@@ -66,14 +66,14 @@ public class TopPanel extends JPanel {
 
             try {
                 if (choice == 0) {
-                    // Wymóg 1: Tylko krawędzie
+                    // Tylko krawędzie
                     File f = chooseFile("Wybierz plik z listą krawędzi (.txt)");
                     if (f != null) {
                         Graph g = DataReader.LoadOnlyEdges(f.getAbsolutePath());
                         if (onGraphLoaded != null) onGraphLoaded.accept(g);
                     }
                 } else if (choice == 1) {
-                    // Wymóg 2: Tekstowe współrzędne (CSV)
+                    // Tekstowe współrzędne (CSV)
                     File fn = chooseFile("KROK 1: Wybierz plik z WĘZŁAMI (.csv)");
                     if (fn != null) {
                         File fe = chooseFile("KROK 2: Wybierz plik z KRAWĘDZIAMI (.txt/.csv)");
@@ -83,7 +83,7 @@ public class TopPanel extends JPanel {
                         }
                     }
                 } else if (choice == 2) {
-                    // Wymóg 3: Pliki Binarne
+                    // Pliki Binarne
                     File fn = chooseFile("KROK 1: Wybierz plik BINARNY z WĘZŁAMI (.bin)");
                     if (fn != null) {
                         File fe = chooseFile("KROK 2: Wybierz plik z KRAWĘDZIAMI");

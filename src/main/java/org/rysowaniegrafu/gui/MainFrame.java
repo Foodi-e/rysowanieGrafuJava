@@ -34,7 +34,7 @@ public class MainFrame extends JFrame {
             canvas.repaint();
         });
 
-        // --- 2. AKCJA PRZYCISKU START ---
+        // --- buttin start---
         topPanel.setOnStartClicked(algorithm -> {
             if (canvas.getGraph() == null || canvas.getGraph().getNodes().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Najpierw wczytaj graf!", "Brak Danych", JOptionPane.WARNING_MESSAGE);
@@ -49,7 +49,7 @@ public class MainFrame extends JFrame {
             canvas.repaint();
         });
 
-        // --- AKCJA ZMIANY PARAMETRU W CZASIE RZECZYWISTYM ---
+        // --- zmiana parametrów z paska ---
         controlPanel.setOnConfigChanged(() -> {
             if (lastRunAlgorithm != null) {
                 runCalculations(canvas); // Przeliczamy ponownie fizykę
@@ -57,13 +57,13 @@ public class MainFrame extends JFrame {
             }
         });
 
-        // --- 4. AKCJA ZMIANY ALGORYTMU NA LIŚCIE ---
+        // --- zmiana algorytmu ---
         topPanel.setOnAlgorithmChanged(algorithm -> {
             config.setAlgorithm(algorithm); // Aktualizujemy główny Config
             controlPanel.setAlgorithm(algorithm); // Wymuszamy zmianę widoku suwaków
         });
 
-        // --- 5. OBSŁUGA ZAPISU GRAFU ---
+        // ---zapis grafu ---
         topPanel.setOnSaveClicked((path, isBinary) -> {
             Graph currentGraph = canvas.getGraph();
 

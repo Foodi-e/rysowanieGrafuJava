@@ -30,28 +30,28 @@ public class CanvasController extends MouseAdapter {
         Node clickedNode = findNodeAt(e.getX(), e.getY());
 
         if (e.getClickCount() == 2) {
-            // PODWÓJNY KLIK -> Otwieramy okienko (zgodnie ze specyfikacją)
+            // 2 klik -> Otwieramy okienko
             if (clickedNode != null) {
                 Frame parentFrame = (Frame) SwingUtilities.getWindowAncestor(canvas);
                 NodeEditDialog dialog = new NodeEditDialog(parentFrame, clickedNode, canvas);
                 dialog.setVisible(true);
             }
         } else if (e.getClickCount() == 1) {
-            // POJEDYNCZY KLIK -> Sprawdzamy, czy złapaliśmy węzeł do przeciągania
+            // 1 klik -> Sprawdzamy czy złapaliśmy węzeł do przeciągania
             if (clickedNode != null) {
                 draggedNode = clickedNode;
             }
         }
     }
 
-    // --- ZWOLNIENIE MYSZKI (Puszczenie Węzła) ---
+    // --- Puszczenie Węzła ---
     @Override
     public void mouseReleased(MouseEvent e) {
         // Niezależnie co trzymaliśmy, puszczamy to
         draggedNode = null;
     }
 
-    // --- OBSŁUGA PRZESUWANIA ---
+    // --- przesuwanie ---
     @Override
     public void mouseDragged(MouseEvent e) {
         if (draggedNode != null) {

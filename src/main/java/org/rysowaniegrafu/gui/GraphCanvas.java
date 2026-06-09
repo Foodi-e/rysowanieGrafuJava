@@ -51,7 +51,7 @@ public class GraphCanvas extends JPanel {
 
         if (graph == null) return;
 
-        // --- POPRAWKA DLA EKRANÓW RETINA ---
+        // --- retina ---
         AffineTransform oldAt = g2d.getTransform();
 
         // dodaje własne parametry kamery

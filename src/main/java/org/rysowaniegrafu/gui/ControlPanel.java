@@ -53,7 +53,7 @@ public class ControlPanel extends JPanel {
         panelTutte.add(spinRadius);
         panelTutte.add(Box.createVerticalStrut(10));
 
-        // 2. Liczba stałych węzłów (kFixed)
+        // Liczba stałych węzłów (kFixed)
         JLabel lblKFixed = new JLabel("Stałe węzły (ramka):");
         lblKFixed.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelTutte.add(lblKFixed);
@@ -89,7 +89,7 @@ public class ControlPanel extends JPanel {
         panelFR.setLayout(new BoxLayout(panelFR, BoxLayout.Y_AXIS));
         panelFR.setBorder(BorderFactory.createTitledBorder("Opcje: Fruchterman-R."));
 
-        // 1. Temperatura
+        // Temperatura
         JLabel lblTemp = new JLabel("Temperatura początkowa:");
         lblTemp.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelFR.add(lblTemp);
@@ -104,7 +104,7 @@ public class ControlPanel extends JPanel {
         panelFR.add(spinTemp);
         panelFR.add(Box.createVerticalStrut(10));
 
-        // 2. Liczba iteracji
+        // Liczba iteracji
         JLabel lblIter = new JLabel("Liczba iteracji:");
         lblIter.setAlignmentX(Component.LEFT_ALIGNMENT);
         panelFR.add(lblIter);
