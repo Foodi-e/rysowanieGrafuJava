@@ -27,8 +27,8 @@ public class NodeEditDialog extends JDialog {
                 double newY = Double.parseDouble(txtY.getText());
                 node.setX(newX);
                 node.setY(newY);
-                canvas.repaint(); // Odśwież płótno po zmianie
-                dispose(); // Zamknij okno
+                canvas.repaint();
+                dispose();
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(this, "Wprowadź poprawne wartości liczbowe!", "Błąd", JOptionPane.ERROR_MESSAGE);
             }

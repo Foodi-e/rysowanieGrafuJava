@@ -21,7 +21,7 @@ public class ControlPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBorder(BorderFactory.createTitledBorder("Parametry Algorytmu"));
 
-        // SZEROKOŚĆ PANELU
+        // szerokość panelu
         setPreferredSize(new Dimension(260, 0));
 
         createTuttePanel();

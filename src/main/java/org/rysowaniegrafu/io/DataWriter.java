@@ -9,13 +9,11 @@ import java.util.Locale;
 
 public class DataWriter {
 
-    // Zapis do formatu tekstowego (CSV)
     public static void SaveCSV(String path, Graph graph) throws IOException {
         List<Node> nodes = graph.getNodes();
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
             for (Node node : nodes) {
-                // Składamy linię: id,x,y (Locale.US gwarantuje kropkę w liczbach zmiennoprzecinkowych)
                 String line = String.format(Locale.US, "%d,%.6f,%.6f",
                         node.getId(), node.getX(), node.getY());
                 writer.write(line);
@@ -24,7 +22,6 @@ public class DataWriter {
         }
     }
 
-    // Zapis do formatu binarnego (BIN)
     public static void SaveBin(String path, Graph graph) throws IOException {
         List<Node> nodes = graph.getNodes();
 

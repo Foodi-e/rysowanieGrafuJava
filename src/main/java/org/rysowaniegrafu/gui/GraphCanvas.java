@@ -51,7 +51,7 @@ public class GraphCanvas extends JPanel {
 
         if (graph == null) return;
 
-        // --- retina ---
+        // retina
         AffineTransform oldAt = g2d.getTransform();
 
         // dodaje własne parametry kamery
@@ -79,7 +79,7 @@ public class GraphCanvas extends JPanel {
                 int x = (int) node.getX() - nodeRadius;
                 int y = (int) node.getY() - nodeRadius;
 
-                // Wyróżnienie stałych węzłów (dla algorytmu Tutte'a)
+                // Wyróżnienie stałych węzłów (Tutte)
                 if (node.isFixed()) {
                     g2d.setColor(new Color(231, 76, 60)); // Czerwony
                 } else {

@@ -24,17 +24,17 @@ public class MainFrame extends JFrame {
         GraphCanvas canvas = new GraphCanvas();
         ControlPanel controlPanel = new ControlPanel(config); // Inicjalizacja nowego panelu
 
-        // --- Wczytywanie ---
+        // Wczytywanie
         topPanel.setOnGraphLoaded(graph -> {
             canvas.setGraph(graph);
             canvas.setPanX(canvas.getWidth() / 2.0);
             canvas.setPanY(canvas.getHeight() / 2.0);
             canvas.setZoomFactor(1.0);
-            lastRunAlgorithm = null; // Resetujemy stan
+            lastRunAlgorithm = null; // Reset stanu
             canvas.repaint();
         });
 
-        // --- buttin start---
+        //  button start
         topPanel.setOnStartClicked(algorithm -> {
             if (canvas.getGraph() == null || canvas.getGraph().getNodes().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Najpierw wczytaj graf!", "Brak Danych", JOptionPane.WARNING_MESSAGE);
@@ -49,7 +49,7 @@ public class MainFrame extends JFrame {
             canvas.repaint();
         });
 
-        // --- zmiana parametrów z paska ---
+        // zmiana parametrów z paska
         controlPanel.setOnConfigChanged(() -> {
             if (lastRunAlgorithm != null) {
                 runCalculations(canvas); // Przeliczamy ponownie fizykę
@@ -57,13 +57,13 @@ public class MainFrame extends JFrame {
             }
         });
 
-        // --- zmiana algorytmu ---
+        // zmiana algorytmu
         topPanel.setOnAlgorithmChanged(algorithm -> {
             config.setAlgorithm(algorithm); // Aktualizujemy główny Config
             controlPanel.setAlgorithm(algorithm); // Wymuszamy zmianę widoku suwaków
         });
 
-        // ---zapis grafu ---
+        //zapis grafu
         topPanel.setOnSaveClicked((path, isBinary) -> {
             Graph currentGraph = canvas.getGraph();
 

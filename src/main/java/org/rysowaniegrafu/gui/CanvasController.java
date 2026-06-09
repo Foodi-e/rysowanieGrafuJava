@@ -23,7 +23,7 @@ public class CanvasController extends MouseAdapter {
         canvas.addMouseWheelListener(this);
     }
 
-    // --- OBSŁUGA KLIKNIĘĆ (Edycja i Łapanie Węzła) ---
+    // edycja i łapanie Węzła
     @Override
     public void mousePressed(MouseEvent e) {
         lastMousePos = e.getPoint();
@@ -37,27 +37,26 @@ public class CanvasController extends MouseAdapter {
                 dialog.setVisible(true);
             }
         } else if (e.getClickCount() == 1) {
-            // 1 klik -> Sprawdzamy czy złapaliśmy węzeł do przeciągania
+            // 1 klik -> Sprawdzanie czy złapaliśmy węzeł do przeciągania
             if (clickedNode != null) {
                 draggedNode = clickedNode;
             }
         }
     }
 
-    // --- Puszczenie Węzła ---
+    // Puszczenie Węzła
     @Override
     public void mouseReleased(MouseEvent e) {
-        // Niezależnie co trzymaliśmy, puszczamy to
         draggedNode = null;
     }
 
-    // --- przesuwanie ---
+    // przesuwanie
     @Override
     public void mouseDragged(MouseEvent e) {
         if (draggedNode != null) {
             // Przeciągamy wierzchołek
             try {
-                // Musimy przeliczyć pozycję kursora na ekranie z powrotem na współrzędne w grafu
+                //  przeliczanie pozycję kursora na ekranie z powrotem na współrzędne w grafu
                 AffineTransform at = new AffineTransform();
                 at.translate(canvas.getPanX(), canvas.getPanY());
                 at.scale(canvas.getZoomFactor(), canvas.getZoomFactor());
@@ -65,7 +64,7 @@ public class CanvasController extends MouseAdapter {
                 Point2D.Float screenPoint = new Point2D.Float(e.getX(), e.getY());
                 Point2D worldPoint = at.inverseTransform(screenPoint, null);
 
-                // Aktualizujemy pozycję trzymanego węzła
+                // Aktualizacja pozycji trzymanego węzła
                 draggedNode.setX(worldPoint.getX());
                 draggedNode.setY(worldPoint.getY());
 
@@ -73,7 +72,7 @@ public class CanvasController extends MouseAdapter {
                 ex.printStackTrace();
             }
         } else {
-            // Przesuwamy całą kamerę
+            // Przesuwanie  kamery
             int dx = e.getX() - lastMousePos.x;
             int dy = e.getY() - lastMousePos.y;
 
@@ -82,11 +81,11 @@ public class CanvasController extends MouseAdapter {
             lastMousePos = e.getPoint();
         }
 
-        // odświeżamy ekran
+        // odświeżanie ekran
         canvas.repaint();
     }
 
-    // --- Zoom ---
+    // Zoom
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
         double scaleFactor = 1.1;
@@ -98,7 +97,7 @@ public class CanvasController extends MouseAdapter {
         canvas.repaint();
     }
 
-    // ---  Wyszukiwanie węzła uwzględniając kamerę ---
+    // wyszukiwanie węzła uwzględniając kamerę
     private Node findNodeAt(int screenX, int screenY) {
         if (canvas.getGraph() == null || canvas.getGraph().getNodes() == null) return null;
 

@@ -54,7 +54,7 @@ public class TopPanel extends JPanel {
     public void setOnStartClicked(Consumer<Algorithm> onStartClicked) { this.onStartClicked = onStartClicked; }
 
     private void setupActions() {
-        // --- wczytywanie ---
+        // wczytywanie
         btnLoad.addActionListener(e -> {
             String[] options = {"Tylko krawędzie (TXT)", "Współrzędne + Krawędzie (CSV)", "Pliki Binarne (BIN)"};
             int choice = JOptionPane.showOptionDialog(this,
